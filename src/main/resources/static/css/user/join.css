@@ -1,0 +1,15 @@
+.join-container > form {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.default-button-wrap {
+    text-align: right;
+}
+
+.bottom-button-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yueonsu.www.user.UserMapper">
+
+    <insert id="insUser">
+        INSERT INTO tUser
+        (sName, sId, sPassword, sEmail)
+        VALUES
+        (#{sName}, #{sId}, #{sPassword}, #{sEmail})
+    </insert>
+
+    <select id="selUser" resultType="UserEntity">
+        SELECT *
+        FROM tUser
+        <where>
+            <if test="sEmail != '' and sEmail != null">
+                AND sEmail = #{sEmail}
+            </if>
+        </where>
+    </select>
+</mapper>
