@@ -9,13 +9,20 @@
         <put-attribute name="body" value=""/>
     </definition>
 
-    <definition name="*" extends="default-layout">
-        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+    <definition name="write-layout" template="/WEB-INF/tiles/templetes/write-layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/tiles/fragments/default/header.jsp"/>
+        <put-attribute name="body" value=""/>
     </definition>
+    <definition name="*/write" extends="write-layout">
+        <put-attribute name="dynamic_css" value="/resources/static/css/{1}/write.css"/>
+        <put-attribute name="dynamic_js" value="/resources/static/js/{1}/write.js"/>
+        <put-attribute name="ck_editor" value="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"/>
+        <put-attribute name="body" value="/WEB-INF/views/{1}/write.jsp"/>
+    </definition>
+
     <definition name="*/*" extends="default-layout">
         <put-attribute name="dynamic_css" value="/resources/static/css/{1}/{2}.css"/>
         <put-attribute name="dynamic_js" value="/resources/static/js/{1}/{2}.js"/>
-        <put-attribute name="title" value="{2}"/>
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
     </definition>
 

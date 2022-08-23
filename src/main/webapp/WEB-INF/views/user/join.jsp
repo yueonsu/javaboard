@@ -47,5 +47,11 @@
         </div>
     </form>
 </div>
+<%-- 이메일 인증번호 전송 로딩화면 --%>
+<div class="spinner-container">
+    <div class="spinner-border text-secondary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 </body>
 </html>

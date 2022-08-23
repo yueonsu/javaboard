@@ -167,7 +167,15 @@ if(joinFormElem) {
 
     // 인증번호 전송
     const sendCode = (sEmail) => {
+        // 인증번호 전송 로딩
+        const spinnerContainer = document.querySelector('.spinner-container');
+        spinnerContainer.style.display = 'flex';
+
         myFetch.get('/ajax/email/code', data => {
+            // 로딩창 없앰
+            spinnerContainer.style.display = 'none';
+            
+            // 인증번호가 null이 아니라면 이벤트 생성
             if(data.resultString != null) {
                 alert('인증번호를 전송했습니다.');
                 checkCodeButton.classList.remove('dis-none');

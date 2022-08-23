@@ -51,6 +51,13 @@
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
+        <!--    JSP security tag    -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+
+
         <!--    시큐리티 설정    -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -16,6 +16,9 @@
             <if test="sEmail != '' and sEmail != null">
                 AND sEmail = #{sEmail}
             </if>
+            <if test="sId != '' and sId != null">
+                AND sId = #{sId}
+            </if>
         </where>
     </select>
 </mapper>

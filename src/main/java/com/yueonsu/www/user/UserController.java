@@ -25,4 +25,9 @@ public class UserController {
         String path = (result == 1) ? "/login" : "/join";
         return "redirect:/user" + path;
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "user/login";
+    }
 }

@@ -1,0 +1,32 @@
+.board-list {
+    min-height: 600px;
+}
+
+table {
+    margin-top: 30px;
+    width: 100%;
+}
+
+table > thead > tr {
+    border-bottom: 3px solid #e5e5e5;
+}
+
+table > tbody > tr:hover {
+    background-color: #e5e5e5;
+    cursor: pointer;
+}
+
+.write-wrap {
+    text-align: right;
+}
+
+.pagination-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.search-container > form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

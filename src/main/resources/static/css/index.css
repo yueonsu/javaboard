@@ -3,7 +3,11 @@
 }
 
 .header {
-    height: 150px;
+    height: 100px;
+    border-bottom: 1px solid black;
+    padding: 10px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 html, body {
@@ -12,7 +16,7 @@ html, body {
 }
 
 .body {
-    padding: 0px 150px 0px 150px;
+    padding: 50px 500px 0px 500px;
 }
 
 .dis-none {
@@ -21,4 +25,20 @@ html, body {
 
 .disabled {
     background-color: #efefef;
+}
+
+.header-user {
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+a:hover {
+    cursor: pointer;
+    color: #cfcfcf;
 }

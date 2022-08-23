@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yueonsu.www.board.BoardMapper">
+
+    <sql id="search">
+        <where>
+            <if test="sel == 1 || sel == 2">
+                OR board.sTitle LIKE CONCAT('%',#{text},'%')
+            </if>
+            <if test="sel == 1 || sel == 3">
+                OR member.sName LIKE CONCAT('%',#{text},'%')
+            </if>
+            <if test="sel == 1 || sel == 4">
+                OR board.sContent LIKE CONCAT('%',#{text},'%')
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insBoard" parameterType="BoardEntity" useGeneratedKeys="true" keyProperty="nBoardSeq">
+        INSERT INTO tBoard
+        (sTitle, sContent, fkUserSeq)
+        VALUES
+        (#{sTitle}, #{sContent}, ${fkUserSeq})
+    </insert>
+
+    <select id="selBoardList" resultType="BoardVo">
+        SELECT board.*, member.sName AS sUserName
+        FROM tBoard board
+        INNER JOIN tUser member
+        ON board.fkUserSeq = member.nUserSeq
+        <include refid="search"></include>
+        LIMIT ${startIdx}, ${rowCnt}
+    </select>
+
+    <select id="selBoardCount" resultType="BoardPageable">
+        SELECT COUNT(board.nBoardSeq) AS totalCount
+        FROM tBoard board
+        INNER JOIN tUser member
+        ON board.fkUserSeq = member.nUserSeq
+        <include refid="search"></include>
+    </select>
+</mapper>
