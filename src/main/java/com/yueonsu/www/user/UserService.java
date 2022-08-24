@@ -1,6 +1,7 @@
 package com.yueonsu.www.user;
 
 import com.yueonsu.www.user.model.UserEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -8,8 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Pattern;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     public int insUser(UserEntity entity) {
         // 유효성 검사

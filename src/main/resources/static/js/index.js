@@ -38,7 +38,7 @@ const myFetch = {
     },
     post : function (url, cb, param) {
         return this.send(fetch(url, {
-            method : 'POSt',
+            method : 'POST',
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify(param)
         }), cb);

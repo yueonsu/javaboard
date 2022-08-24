@@ -7,7 +7,7 @@
   <form action="/board/write" method="post">
     <div class="mb-3">
       <label class="form-label">제목</label>
-      <input type="text" class="form-control title" name="sTitle" id="title exampleFormControlInput" value="">
+      <input type="text" class="form-control title" name="sTitle" id="title exampleFormControlInput"/>
     </div>
     <textarea id="editor" name="sContent" class="content"></textarea>
     <div class="button-wrap">

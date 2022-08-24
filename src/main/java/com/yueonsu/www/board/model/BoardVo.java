@@ -5,6 +5,4 @@ import lombok.Data;
 @Data
 public class BoardVo extends BoardEntity{
     private String sUserName;
-
-
 }

@@ -19,7 +19,6 @@
                     <label for="floatingPassword">Password</label>
                 </div>
                 <div class="error-msg dis-none">
-
                 </div>
                 <div class="text-center">
                     <div>

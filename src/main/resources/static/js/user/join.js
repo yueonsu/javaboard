@@ -72,6 +72,7 @@ if(joinFormElem) {
             idCheck = false;
         }
     });
+
     // 아이디 중복 검사
     useIdButton.addEventListener('click', () => {
         const classname = 'id-msg';

@@ -24,7 +24,7 @@ html, body {
 }
 
 .disabled {
-    background-color: #efefef;
+    background-color: #efefef !important;
 }
 
 .header-user {

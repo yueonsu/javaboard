@@ -25,8 +25,21 @@ table > tbody > tr:hover {
     justify-content: center;
 }
 
-.search-container > form {
+.search-container > .search-div {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.current-page {
+    color: black !important;
+    font-weight: bold;
+}
+
+.page-link {
+    color: gray;
+}
+
+.page-link:hover {
+    color: black;
 }
