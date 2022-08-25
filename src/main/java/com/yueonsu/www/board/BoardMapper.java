@@ -18,4 +18,10 @@ public interface BoardMapper {
     BoardPageable selBoardCount(BoardPageable pageable);
     // 게시글 디테일
     BoardVo selBoardDetail(int nBoardSeq);
+    // 수정 데이터 불러오기
+    BoardEntity selModData(int nBoardSeq);
+    // 게시글 수정
+    int updBoard(BoardEntity entity);
+    // 게시글 삭제
+    int delBoard(int nBoardSeq, int fkUserSeq);
 }

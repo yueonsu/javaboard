@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yueonsu.www.board.like.LikeMapper">
+    <insert id="insLike">
+        INSERT INTO tLike
+        (fkUserSeq, fkBoardSeq)
+        VALUES
+        (${fkUserSeq}, ${fkBoardSeq})
+    </insert>
+
+    <select id="selLike" resultType="LikeEntity">
+        SELECT *
+        FROM tLike
+        WHERE fkUserSeq = ${fkUserSeq} AND fkBoardSeq = ${fkBoardSeq}
+    </select>
+
+    <update id="updBoardLikeCount">
+        UPDATE tBoard
+        SET nLikeCount = nLikeCount ${status} 1
+        WHERE nBoardSeq = ${fkBoardSeq}
+    </update>
+
+    <delete id="delLike">
+        DELETE FROM tLike
+        WHERE fkUserSeq = ${fkUserSeq} AND fkBoardSeq = ${fkBoardSeq}
+    </delete>
+</mapper>

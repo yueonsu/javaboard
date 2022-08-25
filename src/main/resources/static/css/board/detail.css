@@ -12,7 +12,12 @@ textarea { resize: none; }
 
 .top {
     padding: 5px;
-    border-bottom: 1px solid #cfcfcf;
+    border-bottom: 1px solid #cfcfcf
+
+}
+
+.detail-content-wrap {
+    padding: 10px;
 }
 
 .title-wrap {
@@ -29,6 +34,9 @@ textarea { resize: none; }
 .mod-button:hover, .del-button:hover {
     cursor: pointer;
     color: black;
+}
+.mod-button {
+    margin-right: 10px;
 }
 
 .board-info {

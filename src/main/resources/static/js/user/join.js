@@ -156,6 +156,7 @@ if(joinFormElem) {
     sendCodeButton.addEventListener('click', () => {
         const classname = 'email-msg';
         const sEmail = userEmailInput.value;
+        if(sEmail.length === 0) { alert('이메일을 입력해 주세요.'); return; }
         myFetch.get('/ajax/user/emailCheck', data => {
             regexp.delMsg(classname);
             if(data.result === 1) {

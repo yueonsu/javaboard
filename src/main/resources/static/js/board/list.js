@@ -55,7 +55,9 @@ if (boardContainer) {
             `;
             boardTableBody.appendChild(tr);
             
-            /** 디테일 게시판으로 이동 이벤트 */
+            /**
+             * 디테일 게시판으로 이동 이벤트
+             */
             tr.addEventListener('click', () => {
                 location.href = `/board/detail?nBoardSeq=${item.nboardSeq}`;
             });
@@ -83,7 +85,9 @@ if (boardContainer) {
     const setBoardPage = (pageData) => {
         pagination.innerHTML = null;
 
-        /** 페이지 이전페이지 버튼 */
+        /**
+         *  페이지 이전페이지 버튼
+         */
         const prevLi = document.createElement('li');
         prevLi.classList.add('page-item');
         prevLi.innerHTML = `
@@ -91,18 +95,24 @@ if (boardContainer) {
                 <span aria-hidden="true">&laquo;</span>
              </a>
         `;
-        /** 첫 번째 페이지일 때 이전페이지 버튼 비활성화 */
+        /**
+         * 첫 번째 페이지일 때 이전페이지 버튼 비활성화
+         */
         if (!pageData.previous) {
             prevLi.querySelector('.previous').classList.add('disabled');
         }
-        /** 이전페이지 버튼 클릭 이벤트 */
+        /**
+         * 이전페이지 버튼 클릭 이벤트
+         */
         prevLi.addEventListener('click', () => {
             page = (1 === pageData.startPage) ? 1 : pageData.startPage-1;
             getBoardList(page, sel, text);
         });
         pagination.appendChild(prevLi);
 
-        /** 페이징 번호 출력 */
+        /**
+         * 페이징 번호 출력
+         */
         pageData.pageArr.forEach(item => {
             const pageLi = document.createElement('li');
             pageLi.classList.add('page-item');
@@ -113,7 +123,9 @@ if (boardContainer) {
                 page = item;
                 getBoardList(page, sel, text);
             });
-            /** 현재 페이지 강조 */
+            /**
+             * 현재 페이지 강조
+             */
             if (page === item) {
                 const currentPageElem = pageLi.querySelector('.page-num');
                 currentPageElem.classList.add('current-page');
@@ -122,7 +134,9 @@ if (boardContainer) {
             pagination.appendChild(pageLi);
         });
         
-        /** 페이지 다음 페이지 버튼 */
+        /**
+         * 페이지 다음 페이지 버튼
+         */
         const nextLi = document.createElement('li');
         nextLi.classList.add('page-item');
         nextLi.innerHTML = `
@@ -130,12 +144,16 @@ if (boardContainer) {
                 <span aria-hidden="true">&raquo;</span>
             </a>
         `;
-        /** 다음 페이지 버튼 클릭 이벤트 */
+        /**
+         * 다음 페이지 버튼 클릭 이벤트
+         */
         nextLi.addEventListener('click', () => {
             page = (pageData.lastPage < pageData.maxPage) ? pageData.lastPage+1 : pageData.maxPage;
             getBoardList(page, sel, text);
         });
-        /** 마지막 페이지일 때 다음 페이지 버튼 비활성화 */
+        /**
+         * 마지막 페이지일 때 다음 페이지 버튼 비활성화
+         */
         if (!pageData.next) {
             nextLi.querySelector('.next').classList.add('disabled');
         }

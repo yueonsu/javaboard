@@ -24,6 +24,7 @@ public class UserController {
     @PostMapping("/join")
     public String joinProc(UserEntity entity) {
         int result = userService.insUser(entity);
+        System.out.println(entity);
         String path = (result == 1) ? "/login" : "/join";
         return "redirect:/user" + path;
     }

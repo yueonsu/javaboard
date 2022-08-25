@@ -16,22 +16,18 @@
                         </h2>
                     </div>
                     <div>
-                        <%--           login user             --%>
                         <div class="auth-detail">
-                            <a class="mod-button">수정</a>
-                            <span class="del-button">삭제</span>
                         </div>
-                        <%--           login user             --%>
                     </div>
                 </div>
             </div>
 
             <div class="detail-content-wrap">
                 <div class="board-info">
-                    <div>
+                    <div class="board-like">
                         <%--            좋아요            --%>
-                        <i class="fa-regular fa-heart like"></i>
-                        <i class="fa-solid fa-heart like"></i>
+<%--                        <i class="fa-regular fa-heart like"></i>--%>
+<%--                        <i class="fa-solid fa-heart like"></i>--%>
                         <%--            좋아요            --%>
                     </div>
                     <div>

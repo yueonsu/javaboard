@@ -6,7 +6,8 @@ import java.util.List;
 
 @Data
 public class BoardResultVo {
-    private String status;
-    private String desc;
+    private String status = "200";
+    private String desc = "success";
     private Object result;
+    private int loginUserPk;
 }

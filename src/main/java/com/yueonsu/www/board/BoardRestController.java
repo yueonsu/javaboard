@@ -6,6 +6,9 @@ import com.yueonsu.www.board.model.BoardResultVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/ajax/board")
 @RequiredArgsConstructor
@@ -47,6 +50,16 @@ public class BoardRestController {
         return boardService.getPage(pageable);
     }
 
+    @PostMapping("/detail")
+    public BoardResultVo insBoard(@RequestBody Map<String, Object> data) {
+        String sTitle = data.get("stitle").toString();
+        String sContent = data.get("scontent").toString();
+        BoardEntity entity = new BoardEntity();
+        entity.setSTitle(sTitle);
+        entity.setSContent(sContent);
+        return boardService.insBoard(entity);
+    }
+
     /**
      * 디테일 게시글
      * @param nBoardSeq = 게시글 번호
@@ -56,10 +69,42 @@ public class BoardRestController {
         return boardService.selBoardDetail(nBoardSeq);
     }
 
-    @GetMapping("/delete")
-    public BoardResultVo delBoard(int nBoardSeq) {
-        BoardResultVo vo = new BoardResultVo();
-        System.out.println(nBoardSeq);
-        return vo;
+    /**
+     * 수정 데이터 불러오기
+     * @param nBoardSeq
+     */
+    @GetMapping("/mod")
+    public BoardResultVo getModData(int nBoardSeq) {
+        return boardService.selModData(nBoardSeq);
+    }
+
+
+    /**
+     * 게시물 수정
+     * @param data = sTitle, sContent, nBoardSeq
+     *
+     */
+    @PutMapping("/detail")
+    public BoardResultVo modBoard(@RequestBody HashMap<String, Object> data) {
+
+        String sTitle = data.get("stitle").toString();
+        String sContent = data.get("scontent").toString();
+        int nBoardSeq = Integer.parseInt(data.get("nboardSeq").toString());
+
+        BoardEntity entity = new BoardEntity();
+        entity.setSTitle(sTitle);
+        entity.setSContent(sContent);
+        entity.setNBoardSeq(nBoardSeq);
+
+        return boardService.updBoard(entity);
+    }
+
+    /**
+     * 게시글 삭제
+     * @param nBoardSeq
+     */
+    @DeleteMapping("/detail")
+    public BoardResultVo authDelBoard(int nBoardSeq) {
+        return boardService.delBoard(nBoardSeq);
     }
 }

@@ -54,5 +54,23 @@
         WHERE board.nBoardSeq = ${nBoardSeq}
     </select>
 
+    <!--  게시물 수정 데이터 불러오기  -->
+    <select id="selModData" resultType="BoardEntity">
+        SELECT *
+        FROM tBoard
+        WHERE nBoardSeq = ${nBoardSeq}
+    </select>
 
+    <!--  게시물 수정  -->
+    <update id="updBoard">
+        UPDATE tBoard
+        SET sTitle = #{sTitle}, sContent = #{sContent}
+        WHERE nBoardSeq = ${nBoardSeq} AND fkUserSeq = ${fkUserSeq}
+    </update>
+
+    <!--  게시물 삭제  -->
+    <delete id="delBoard">
+        DELETE FROM tBoard
+        WHERE nBoardSeq = ${nBoardSeq} AND fkUserSeq = ${fkUserSeq}
+    </delete>
 </mapper>

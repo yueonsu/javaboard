@@ -19,9 +19,13 @@ public class UserRestController {
     @Autowired private EmailService emailService;
 
     @GetMapping("/idCheck")
-    public ResultVo idCheck() {
+    public ResultVo idCheck(UserEntity param) {
         ResultVo vo = new ResultVo();
+        UserEntity entity = userService.selUser(param);
         vo.setResult(1);
+        if(entity != null) {
+            vo.setResult(0);
+        }
         return vo;
     }
 

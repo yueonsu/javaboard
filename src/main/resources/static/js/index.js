@@ -42,5 +42,22 @@ const myFetch = {
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify(param)
         }), cb);
+    },
+    put : function (url, cb, param) {
+        return this.send(fetch(url, {
+            method : 'PUT',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify(param)
+        }), cb);
+    },
+    delete : function (url, cb, param) {
+        if(param) {
+            const queryString = '?' + Object.keys(param).map(key => `${key}=${param[key]}`).join("&");
+            url += queryString;
+        }
+        return this.send(fetch(url, {
+            method : 'DELETE',
+            headers : {'Content-Type' : 'application/json'}
+        }), cb);
     }
 }

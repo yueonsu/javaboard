@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class MainController {
 
+    // 날짜 포맷팅
+    // 조회수
+    // 좋아요
+    // 댓글
+
     @GetMapping
     public String main() {
         return "redirect:/board/list";
