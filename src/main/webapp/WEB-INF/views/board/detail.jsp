@@ -56,19 +56,19 @@
         <div class="comment-pagination">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item comment-prev">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
+<%--                    <li class="page-item comment-prev">--%>
+<%--                        <a class="page-link" href="#" aria-label="Previous">--%>
+<%--                            <span aria-hidden="true">&laquo;</span>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
                     <div style="display: flex;" class="page-list">
 
                     </div>
-                    <li class="page-item comment-next">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+<%--                    <li class="page-item comment-next">--%>
+<%--                        <a class="page-link" href="#" aria-label="Next">--%>
+<%--                            <span aria-hidden="true">&raquo;</span>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
                 </ul>
             </nav>
         </div>

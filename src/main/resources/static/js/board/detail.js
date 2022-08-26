@@ -243,32 +243,77 @@ if (detailContainer) {
         const pageList = document.querySelector('.page-list');
         pageList.innerHTML = null;
 
-        const commentPrev = document.querySelector('.comment-prev');
-        const commentNext = document.querySelector('.comment-next');
+        const isPrev = document.querySelector('.comment-prev');
+        const isNext = document.querySelector('.comment-next');
+        if (isPrev) {
+            isPrev.remove();
+        }
+        if (isNext) {
+            isNext.remove();
+        }
 
-        commentPrev.classList.remove('disabled');
-        commentPrev.classList.remove('disabled');
+        const commentPrev = document.createElement('li');
+        commentPrev.className = 'page-item comment-prev';
+        commentPrev.innerHTML = `
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        `;
 
-
-        if (!data.previous){
+        if (!data.previous) {
             commentPrev.classList.add('disabled');
         } else {
             commentPrev.addEventListener('click', () => {
                 page = data.startPage - 1;
-                getList();
-                setPage();
+                getTotalPage();
             });
         }
+
+        const commentNext = document.createElement('li');
+        commentNext.className = 'page-item comment-next';
+        commentNext.innerHTML = `
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        `;
 
         if (!data.next) {
             commentNext.classList.add('disabled');
         } else {
             commentNext.addEventListener('click', () => {
                 page = data.lastPage + 1;
-                getList();
-                setPage();
+                getTotalPage();
             });
         }
+
+        pageList.before(commentPrev);
+        pageList.after(commentNext);
+        // const commentPrev = document.querySelector('.comment-prev');
+        // const commentNext = document.querySelector('.comment-next');
+        //
+        // commentPrev.classList.remove('disabled');
+        // commentPrev.classList.remove('disabled');
+        //
+        //
+        // if (!data.previous){
+        //     commentPrev.classList.add('disabled');
+        // } else {
+        //     commentPrev.addEventListener('click', () => {
+        //         console.log('as');
+        //         page = data.startPage - 1;
+        //         getTotalPage();
+        //     });
+        // }
+        //
+        // if (!data.next) {
+        //     commentNext.classList.add('disabled');
+        // } else {
+        //     commentNext.addEventListener('click', () => {
+        //         console.log('as');
+        //         page = data.lastPage + 1;
+        //         getTotalPage();
+        //     });
+        // }
 
         for (var i=data.startPage; i<=data.lastPage; i++) {
             const li = document.createElement('li');
@@ -285,8 +330,7 @@ if (detailContainer) {
 
             li.addEventListener('click', () => {
                 page = li.querySelector('.page-link').innerText;
-                getList();
-                setPage();
+                getTotalPage();
             });
         }
     }
