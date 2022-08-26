@@ -26,12 +26,12 @@ public class AuthenticationAop {
     private final BoardMapper boardMapper;
 
     /**
-     * 로그인 검증 aop
+     * 로그인 검증 Controller
      * @param joinPoint
      * @return
      */
     @Around("execution(* com.yueonsu.www.board.BoardController.write(..))")
-    public Object loginAuth1(ProceedingJoinPoint joinPoint) {
+    public Object boardAop(ProceedingJoinPoint joinPoint) throws Throwable {
         int loginUserPk = authenticationFacade.getLoginUserPk();
         
         /**
@@ -53,6 +53,34 @@ public class AuthenticationAop {
             }
         }
 
-        return "board/write";
+        return joinPoint.proceed();
+    }
+
+    /**
+     * 로그인 검증 RestController
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
+    @Around("execution(* com.yueonsu.www.board.BoardRestController.auth*(..))")
+    public Object boardRestAop(ProceedingJoinPoint joinPoint) throws Throwable {
+        return getObject(joinPoint);
+    }
+
+    @Around("execution(* com.yueonsu.www.board.comment.CommentRestController.auth*(..))")
+    public Object commentAop(ProceedingJoinPoint joinPoint) throws Throwable {
+        return getObject(joinPoint);
+    }
+
+    private Object getObject(ProceedingJoinPoint joinPoint) throws Throwable {
+        int loginUserPk = authenticationFacade.getLoginUserPk();
+        if (0 == loginUserPk) {
+            BoardResultVo vo = new BoardResultVo();
+            vo.setStatus("400");
+            vo.setDesc("fail");
+            vo.setResult(null);
+            return vo;
+        }
+        return joinPoint.proceed();
     }
 }

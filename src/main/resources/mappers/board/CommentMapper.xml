@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yueonsu.www.board.comment.CommentMapper">
+
+    <!--  댓글  -->
+    <insert id="insComment">
+        INSERT INTO tComment
+        (fkUserSeq, fkBoardSeq, sContent)
+        VALUES
+        (${fkUserSeq}, ${fkBoardSeq}, #{sContent})
+    </insert>
+    <select id="selCommentList" resultType="CommentVo">
+        SELECT cmt.*, member.sName AS username
+        FROM tComment cmt
+        INNER JOIN tUser member
+        ON cmt.fkUserSeq = member.nUserSeq
+        WHERE cmt.fkBoardSeq = ${fkBoardSeq} AND nReply = 0
+        ORDER BY cmt.dtCreateDate DESC
+        LIMIT ${startIdx}, ${rowCnt}
+    </select>
+
+    <select id="selTotalPage" resultType="CommentPageable">
+        SELECT COUNT(*) AS totalPage
+        FROM tComment
+        WHERE fkBoardSeq = ${fkBoardSeq} AND nReply = 0
+    </select>
+
+
+
+    <!--  대댓글  -->
+    <insert id="insReply" useGeneratedKeys="true" parameterType="CommentEntity" keyProperty="nCommentSeq">
+        INSERT INTO tComment
+        (fkUserSeq, fkBoardSeq, sContent, nReply)
+        VALUES
+        (${fkUserSeq}, ${fkBoardSeq}, #{sContent}, ${nReply})
+    </insert>
+    <select id="selReplyList" resultType="CommentVo">
+        SELECT cmt.*, member.sName AS username
+        FROM tComment cmt
+        INNER JOIN tUser member
+        ON cmt.fkUserSeq = member.nUserSeq
+        WHERE cmt.nReply = ${nCommentSeq}
+        ORDER BY cmt.dtCreateDate
+    </select>
+    <select id="selReply" resultType="CommentVo">
+        SELECT cmt.*, member.sName AS username
+        FROM tComment cmt
+        INNER JOIN tUser member
+        ON cmt.fkUserSeq = member.nUserSeq
+        AND nCommentSeq = ${nCommentSeq}
+    </select>
+
+    <update id="updComment">
+        UPDATE tComment
+        SET sContent = #{sContent}
+        WHERE nCommentSeq = ${nCommentSeq} AND fkUserSeq = ${fkUserSeq}
+    </update>
+</mapper>

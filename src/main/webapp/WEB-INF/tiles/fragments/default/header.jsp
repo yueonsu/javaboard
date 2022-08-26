@@ -18,7 +18,6 @@
         <div>
             <span>${user} 님</span>
         </div>
-        <a href="#"><strong>마이페이지</strong></a>
         <a href="/user/logout"><strong>로그아웃</strong></a>
     </sec:authorize>
 

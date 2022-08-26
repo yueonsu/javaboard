@@ -137,8 +137,6 @@ public class BoardService {
      */
     public BoardResultVo updBoard(BoardEntity entity) {
         BoardResultVo vo = new BoardResultVo();
-        int loginUserPk = authenticationFacade.getLoginUserPk();
-        entity.setFkUserSeq(loginUserPk);
         int result = 0;
         try {
             result = boardMapper.updBoard(entity);
@@ -157,21 +155,14 @@ public class BoardService {
 
     /**
      * 글 삭제
-     * @param nBoardSeq
+     * @param entity
      * @return
      */
-    public BoardResultVo delBoard(int nBoardSeq) {
+    public BoardResultVo delBoard(BoardEntity entity) {
         BoardResultVo vo = new BoardResultVo();
-        int loginUserPk = authenticationFacade.getLoginUserPk();
         int result = 0;
-        if(0 == loginUserPk) {
-            vo.setResult(0);
-            vo.setStatus("400");
-            vo.setDesc("fail");
-            return vo;
-        }
         try {
-            result = boardMapper.delBoard(nBoardSeq, loginUserPk);
+            result = boardMapper.delBoard(entity);
         } catch (Exception ignored) {
             vo.setStatus("400");
             vo.setDesc("fail");

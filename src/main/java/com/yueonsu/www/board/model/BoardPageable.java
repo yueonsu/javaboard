@@ -10,9 +10,9 @@ import java.util.List;
 public class BoardPageable {
     
     // 한 페이지에 나오는 게시물 수
-    private int rowCnt = 15;
+    private int rowCnt = 5;
     // 한 페이지에 나오는 페이지 수
-    private int pageCnt = 10;
+    private int pageCnt = 5;
     private int startIdx;
     private int page;
     // 페이지 마지막 번호

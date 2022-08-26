@@ -23,5 +23,5 @@ public interface BoardMapper {
     // 게시글 수정
     int updBoard(BoardEntity entity);
     // 게시글 삭제
-    int delBoard(int nBoardSeq, int fkUserSeq);
+    int delBoard(BoardEntity entity);
 }

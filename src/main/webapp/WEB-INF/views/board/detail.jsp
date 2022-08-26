@@ -43,18 +43,9 @@
             </div>
         </div>
 
-        <div class="comment">
+        <div class="comment-write-container">
             <%--      login user      --%>
-            <div class="comment-write-wrap">
-                <form class="comment-write" method="post" action="">
-                    <input type="hidden" name="iuser">
-                    <input type="hidden" name="iboard">
-                    <textarea name="content"></textarea>
-                    <div>
-                        <button class="btn btn-secondary">댓글쓰기</button>
-                    </div>
-                </form>
-            </div>
+
             <%--      login user      --%>
         </div>
         <div class="comment-content-wrap">

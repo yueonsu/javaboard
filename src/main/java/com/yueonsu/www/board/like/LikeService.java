@@ -66,10 +66,10 @@ public class LikeService {
                 vo.setResult(0);
             }
         }
+        vo.setResult(status);
         if(0 != Integer.parseInt(vo.getResult().toString())) {
             likeMapper.updBoardLikeCount(dto);
         }
-        vo.setResult(status);
 
         return vo;
     }

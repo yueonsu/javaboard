@@ -7,11 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class MainController {
-
-    // 날짜 포맷팅
-    // 조회수
-    // 좋아요
     // 댓글
+    // tHit fkUserSeq -> sIp
 
     @GetMapping
     public String main() {

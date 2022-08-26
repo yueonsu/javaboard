@@ -1,5 +1,6 @@
 package com.yueonsu.www.board;
 
+import com.yueonsu.www.auth.AuthenticationFacade;
 import com.yueonsu.www.board.model.BoardEntity;
 import com.yueonsu.www.board.model.BoardPageable;
 import com.yueonsu.www.board.model.BoardResultVo;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class BoardRestController {
 
     private final BoardService boardService;
+    private final AuthenticationFacade authenticationFacade;
 
     /**
      * 게시글 리스트
@@ -51,12 +53,14 @@ public class BoardRestController {
     }
 
     @PostMapping("/detail")
-    public BoardResultVo insBoard(@RequestBody Map<String, Object> data) {
+    public BoardResultVo authInsBoard(@RequestBody Map<String, Object> data) {
         String sTitle = data.get("stitle").toString();
         String sContent = data.get("scontent").toString();
         BoardEntity entity = new BoardEntity();
         entity.setSTitle(sTitle);
         entity.setSContent(sContent);
+        entity.setFkUserSeq(authenticationFacade.getLoginUserPk());
+
         return boardService.insBoard(entity);
     }
 
@@ -85,7 +89,7 @@ public class BoardRestController {
      *
      */
     @PutMapping("/detail")
-    public BoardResultVo modBoard(@RequestBody HashMap<String, Object> data) {
+    public BoardResultVo authModBoard(@RequestBody HashMap<String, Object> data) {
 
         String sTitle = data.get("stitle").toString();
         String sContent = data.get("scontent").toString();
@@ -95,6 +99,7 @@ public class BoardRestController {
         entity.setSTitle(sTitle);
         entity.setSContent(sContent);
         entity.setNBoardSeq(nBoardSeq);
+        entity.setFkUserSeq(authenticationFacade.getLoginUserPk());
 
         return boardService.updBoard(entity);
     }
@@ -105,6 +110,10 @@ public class BoardRestController {
      */
     @DeleteMapping("/detail")
     public BoardResultVo authDelBoard(int nBoardSeq) {
-        return boardService.delBoard(nBoardSeq);
+        BoardEntity entity = new BoardEntity();
+        entity.setNBoardSeq(nBoardSeq);
+        entity.setFkUserSeq(authenticationFacade.getLoginUserPk());
+
+        return boardService.delBoard(entity);
     }
 }
