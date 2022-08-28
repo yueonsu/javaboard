@@ -32,14 +32,14 @@ public class CommentService {
             vo.setDesc("fail");
         }
         vo.setResult(result);
+        // TODO 댓글수 증가
 
         return vo;
     }
 
     /**
      * 댓글 리스트
-     * @param entity
-     * @return
+     * @param pageable
      */
     public BoardResultVo selCommentList(CommentPageable pageable) {
         BoardResultVo vo = new BoardResultVo();
@@ -115,6 +115,10 @@ public class CommentService {
         return vo;
     }
 
+    /**
+     * 댓글 전체 페이지 수
+     * @param pageable
+     */
     public BoardResultVo selTotalPage(CommentPageable pageable) {
         BoardResultVo vo = new BoardResultVo();
         CommentPageable dbPageable = new CommentPageable();

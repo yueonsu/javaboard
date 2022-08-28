@@ -39,7 +39,6 @@ public class CommentRestController {
     /**
      * 댓글 리스트
      * @param fkBoardSeq
-     * @return
      */
     @GetMapping
     public BoardResultVo getCommentlist(int fkBoardSeq, int page) {
@@ -53,7 +52,6 @@ public class CommentRestController {
     /**
      * 대댓글 여부 확인
      * @param nCommentSeq
-     * @return
      */
     @GetMapping("/reply")
     public BoardResultVo isReply(int nCommentSeq) {
@@ -63,7 +61,6 @@ public class CommentRestController {
     /**
      * 대댓글 등록
      * @param replyData
-     * @return
      */
     @PostMapping("/reply")
     public BoardResultVo authInsReply(@RequestBody Map<String, Object> replyData) {
@@ -80,6 +77,10 @@ public class CommentRestController {
         return commentService.insReply(entity);
     }
 
+    /**
+     * 댓글 수정
+     * @param modData
+     */
     @PutMapping
     public BoardResultVo authUpdComment(@RequestBody Map<String, Object> modData) {
         String sContent = modData.get("sContent").toString();
@@ -94,6 +95,11 @@ public class CommentRestController {
         return commentService.updComment(entity);
     }
 
+    /**
+     * 댓글 전체 페이지
+     * @param fkBoardSeq
+     * @param page
+     */
     @GetMapping("/page/total")
     public BoardResultVo getTotalPage(int fkBoardSeq, int page) {
         CommentPageable pageable = new CommentPageable();

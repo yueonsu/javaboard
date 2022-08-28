@@ -238,6 +238,7 @@ if (detailContainer) {
         }, {fkBoardSeq : nBoardSeq, page : page});
     }
 
+    /** 페이징 출력 */
     const setPage = (data) => {
 
         const pageList = document.querySelector('.page-list');
@@ -251,7 +252,8 @@ if (detailContainer) {
         if (isNext) {
             isNext.remove();
         }
-
+        
+        /** 이전 페이지 버튼 */
         const commentPrev = document.createElement('li');
         commentPrev.className = 'page-item comment-prev';
         commentPrev.innerHTML = `
@@ -268,7 +270,8 @@ if (detailContainer) {
                 getTotalPage();
             });
         }
-
+        
+        /** 다음 페이지 버튼 */
         const commentNext = document.createElement('li');
         commentNext.className = 'page-item comment-next';
         commentNext.innerHTML = `
@@ -288,33 +291,8 @@ if (detailContainer) {
 
         pageList.before(commentPrev);
         pageList.after(commentNext);
-        // const commentPrev = document.querySelector('.comment-prev');
-        // const commentNext = document.querySelector('.comment-next');
-        //
-        // commentPrev.classList.remove('disabled');
-        // commentPrev.classList.remove('disabled');
-        //
-        //
-        // if (!data.previous){
-        //     commentPrev.classList.add('disabled');
-        // } else {
-        //     commentPrev.addEventListener('click', () => {
-        //         console.log('as');
-        //         page = data.startPage - 1;
-        //         getTotalPage();
-        //     });
-        // }
-        //
-        // if (!data.next) {
-        //     commentNext.classList.add('disabled');
-        // } else {
-        //     commentNext.addEventListener('click', () => {
-        //         console.log('as');
-        //         page = data.lastPage + 1;
-        //         getTotalPage();
-        //     });
-        // }
 
+        /** 페이지 번호 출력 */
         for (var i=data.startPage; i<=data.lastPage; i++) {
             const li = document.createElement('li');
             li.classList.add('page-item');

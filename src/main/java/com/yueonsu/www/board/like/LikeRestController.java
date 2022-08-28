@@ -15,6 +15,10 @@ public class LikeRestController {
     private final LikeService likeService;
     private final AuthenticationFacade authenticationFacade;
 
+    /**
+     * 좋아요 여부
+     * @param nBoardSeq
+     */
     @GetMapping("/show")
     public BoardResultVo showLikeStatus(@RequestParam int nBoardSeq) {
         LikeEntity entity = new LikeEntity();
@@ -24,6 +28,10 @@ public class LikeRestController {
         return likeService.showLikeStatus(entity);
     }
 
+    /**
+     * 좋아요 상태 바꾸기
+     * @param data
+     */
     @PostMapping("/change")
     public BoardResultVo changeLikeStatus(@RequestBody Map<String, Object> data) {
         int fkBoardSeq = Integer.parseInt(data.get("fkboardSeq").toString());

@@ -10,6 +10,10 @@ public class HitService {
 
     private final HitMapper hitMapper;
 
+    /**
+     * 조회수 증가
+     * @param entity
+     */
     public void hitCountUp(HitEntity entity) {
         int result = 0;
         try {
