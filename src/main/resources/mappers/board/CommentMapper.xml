@@ -76,6 +76,8 @@
         WHERE nCommentSeq = ${nCommentSeq}
           AND fkUserSeq = ${fkUserSeq}
     </delete>
+
+    <!--  대댓글 삭제  -->
     <delete id="delReply">
         DELETE
         FROM
@@ -90,6 +92,8 @@
         VALUES
             (${fkUserSeq}, ${fkBoardSeq}, #{sContent}, ${nReply})
     </insert>
+
+    <!--  대댓글 리스트  -->
     <select id="selReplyList" resultType="CommentVo">
         SELECT
             cmt.*,
@@ -113,6 +117,7 @@
             nCommentSeq = ${nCommentSeq}
     </select>
 
+    <!--  댓글 / 대댓글 수정  -->
     <update id="updComment">
         UPDATE
             tComment
@@ -122,4 +127,5 @@
             nCommentSeq = ${nCommentSeq}
             AND fkUserSeq = ${fkUserSeq}
     </update>
+
 </mapper>

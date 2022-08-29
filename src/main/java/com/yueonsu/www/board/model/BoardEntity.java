@@ -14,10 +14,5 @@ public class BoardEntity {
     private int nLikeCount;
     private int nHitCount;
     private int nCommentCount;
-    private Timestamp dtCreateDate;
-
-    public String getDtCreateDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return simpleDateFormat.format(this.dtCreateDate);
-    }
+    private String dtCreateDate;
 }

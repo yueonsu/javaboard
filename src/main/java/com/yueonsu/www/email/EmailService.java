@@ -27,7 +27,6 @@ public class EmailService {
         message.setTo(entity.getSEmail());
         message.setSubject("회원가입 인증번호는 " + key + "입니다.");
         message.setText("회원가입 인증번호는 " + key + "입니다.");
-//        message.setFrom("yutestyu@gmail.com");
 
         javaMailSender.send(message);
 

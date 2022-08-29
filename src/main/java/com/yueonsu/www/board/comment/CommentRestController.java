@@ -80,7 +80,7 @@ public class CommentRestController {
     }
 
     /**
-     * 대댓글 여부 확인
+     * 대댓글 여부 확인 / 리스트 출력
      */
     @GetMapping("/reply")
     public BoardResultVo isReply(@RequestParam(required = true) int nCommentSeq) {
@@ -166,15 +166,12 @@ public class CommentRestController {
             return bv;
         }
 
-
         CommentEntity entity = new CommentEntity();
         entity.setSContent(content);
         entity.setFkUserSeq(userSeq);
         entity.setNCommentSeq(commentSeq);
 
         bv.setResult(commentService.updComment(entity));
-
-
 
         return bv;
     }
@@ -207,7 +204,8 @@ public class CommentRestController {
      * @return
      */
     @DeleteMapping
-    public BoardResultVo authDelComment(@RequestParam(required = true) int nCommentSeq, @RequestParam int fkBoardSeq) {
+    public BoardResultVo authDelComment(@RequestParam(required = true) int nCommentSeq,
+                                        @RequestParam int fkBoardSeq) {
         BoardResultVo vo = new BoardResultVo();
 
         /**

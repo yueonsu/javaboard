@@ -32,6 +32,7 @@ if(writeContainer) {
                 stitle : title.value,
                 scontent : edit.getData()
             }
+            console.log(data);
             myFetch.post('/ajax/board/detail', data => {
                 console.log(data);
                 if(data.status === '200') {

@@ -44,6 +44,7 @@ if (boardContainer) {
         list.forEach(item => {
             const tr = document.createElement('tr');
             const replaceTitle = item.stitle.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+            const fotmatedDate = new Date("");
             tr.innerHTML = `
                 <td>${item.rowNumber}</td>
                 <td>${replaceTitle}</td>
@@ -169,6 +170,7 @@ if (boardContainer) {
      */
     const getBoardList = (page, sel, text) => {
         myFetch.get('/ajax/board/list', data => {
+            console.log(data);
             if(data.status === "200") {
                 setBoardList(data.result);
                 getBoardPageList(page, sel, text);

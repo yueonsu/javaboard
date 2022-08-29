@@ -6,7 +6,6 @@ import com.yueonsu.www.board.model.BoardPageable;
 import com.yueonsu.www.board.model.BoardResultVo;
 import com.yueonsu.www.board.model.BoardVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,6 +42,7 @@ public class BoardService {
             resultVo.setStatus("400");
             resultVo.setDesc("fail");
         }
+
         resultVo.setResult(vo);
 
         return resultVo;
@@ -83,7 +83,7 @@ public class BoardService {
         int result = 0;
         try {
             result = boardMapper.insBoard(entity);
-        } catch (DuplicateKeyException ignored) {
+        } catch (Exception ignored) {
             vo.setStatus("500");
             vo.setDesc("fail");
         }

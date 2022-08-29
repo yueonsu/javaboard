@@ -24,7 +24,9 @@ public class BoardRestController {
      * @param text = 검색어
      */
     @GetMapping("list")
-    public BoardResultVo getBoardList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "1") int sel, @RequestParam(defaultValue = "") String text) {
+    public BoardResultVo getBoardList(@RequestParam(defaultValue = "1") int page,
+                                      @RequestParam(defaultValue = "1") int sel,
+                                      @RequestParam(defaultValue = "") String text) {
         BoardPageable pageable = new BoardPageable();
         pageable.setPage(page);
         pageable.setSel(sel);
@@ -80,7 +82,6 @@ public class BoardRestController {
         entity.setSTitle(title);
         entity.setSContent(content);
         entity.setFkUserSeq(authenticationFacade.getLoginUserPk());
-
 
         vo = boardService.insBoard(entity);
 
