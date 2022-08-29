@@ -2,16 +2,16 @@ package com.yueonsu.www.auth;
 
 import com.yueonsu.www.user.UserMapper;
 import com.yueonsu.www.user.model.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
+@RequiredArgsConstructor
 public class AuthenticationFacade {
 
-    @Autowired private UserMapper mapper;
+    private final UserMapper mapper;
 
     public UserEntity getLoginUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -3,14 +3,24 @@
 <mapper namespace="com.yueonsu.www.board.hit.HitMapper">
     <insert id="insHit">
         INSERT INTO tHit
-        (fkUserSeq, fkBoardSeq)
+            (fkUserSeq, fkBoardSeq)
         VALUES
-        (${fkUserSeq}, ${fkBoardSeq})
+            (${fkUserSeq}, ${fkBoardSeq})
     </insert>
 
     <update id="updBoardHit">
-        UPDATE tBoard
-        SET nHitCount = nHitCount + 1
-        WHERE nBoardSeq = ${fkBoardSeq}
+        UPDATE
+            tBoard
+        SET
+            nHitCount = (
+                SELECT
+                    COUNT(*)
+                FROM
+                    tHit
+                WHERE
+                    fkBoardSeq = ${fkBoardSeq}
+            )
+        WHERE
+            nBoardSeq = ${fkBoardSeq}
     </update>
 </mapper>

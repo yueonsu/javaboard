@@ -3,56 +3,123 @@
 <mapper namespace="com.yueonsu.www.board.comment.CommentMapper">
 
     <!--  댓글  -->
+
+    <!--  댓글 달기  -->
     <insert id="insComment">
         INSERT INTO tComment
-        (fkUserSeq, fkBoardSeq, sContent)
+            (fkUserSeq, fkBoardSeq, sContent)
         VALUES
-        (${fkUserSeq}, ${fkBoardSeq}, #{sContent})
+            (${fkUserSeq}, ${fkBoardSeq}, #{sContent})
     </insert>
+
+    <!--  댓글 리스트  -->
     <select id="selCommentList" resultType="CommentVo">
-        SELECT cmt.*, member.sName AS username
-        FROM tComment cmt
-        INNER JOIN tUser member
-        ON cmt.fkUserSeq = member.nUserSeq
-        WHERE cmt.fkBoardSeq = ${fkBoardSeq} AND nReply = 0
-        ORDER BY cmt.dtCreateDate DESC
-        LIMIT ${startIdx}, ${rowCnt}
+        SELECT
+            cmt.*,
+            member.sName AS username
+        FROM
+            tComment cmt
+            INNER JOIN tUser member ON cmt.fkUserSeq = member.nUserSeq
+        WHERE cmt.fkBoardSeq = ${fkBoardSeq}
+          AND nReply = 0
+        ORDER BY
+            cmt.dtCreateDate DESC
+        LIMIT
+            ${startIdx}, ${rowCnt}
     </select>
 
+    <!--  댓글 마지막번호  -->
+    <select id="selCommentLastSeq" resultType="CommentVo">
+        SELECT
+            nCommentSeq
+        FROM
+            tComment
+        ORDER BY
+            nCommentSeq DESC
+        LIMIT
+            1
+    </select>
+
+    <!--  댓글 갯수  -->
     <select id="selTotalPage" resultType="CommentPageable">
-        SELECT COUNT(*) AS totalPage
-        FROM tComment
-        WHERE fkBoardSeq = ${fkBoardSeq} AND nReply = 0
+        SELECT
+            COUNT(*) AS totalPage
+        FROM
+            tComment
+        WHERE fkBoardSeq = ${fkBoardSeq}
+          AND nReply = 0
     </select>
 
+    <!--  댓글 수 증감 -->
+    <update id="updCommentCount">
+        UPDATE
+            tBoard
+        SET
+            nCommentCount = (
+                SELECT
+                    COUNT(*)
+                FROM
+                    tComment
+                WHERE
+                    fkBoardSeq = ${fkBoardSeq}
+                    AND nReply = 0
+            )
+        WHERE
+            nBoardSeq = ${fkBoardSeq}
+    </update>
 
+    <!--  댓글 삭제 -->
+    <delete id="delComment">
+        DELETE
+        FROM
+            tComment
+        WHERE nCommentSeq = ${nCommentSeq}
+          AND fkUserSeq = ${fkUserSeq}
+    </delete>
+    <delete id="delReply">
+        DELETE
+        FROM
+            tComment
+        WHERE nReply = ${nCommentSeq}
+    </delete>
 
     <!--  대댓글  -->
     <insert id="insReply" useGeneratedKeys="true" parameterType="CommentEntity" keyProperty="nCommentSeq">
         INSERT INTO tComment
-        (fkUserSeq, fkBoardSeq, sContent, nReply)
+            (fkUserSeq, fkBoardSeq, sContent, nReply)
         VALUES
-        (${fkUserSeq}, ${fkBoardSeq}, #{sContent}, ${nReply})
+            (${fkUserSeq}, ${fkBoardSeq}, #{sContent}, ${nReply})
     </insert>
     <select id="selReplyList" resultType="CommentVo">
-        SELECT cmt.*, member.sName AS username
-        FROM tComment cmt
-        INNER JOIN tUser member
-        ON cmt.fkUserSeq = member.nUserSeq
-        WHERE cmt.nReply = ${nCommentSeq}
-        ORDER BY cmt.dtCreateDate
+        SELECT
+            cmt.*,
+            member.sName AS username
+        FROM
+            tComment cmt
+            INNER JOIN tUser member ON cmt.fkUserSeq = member.nUserSeq
+        WHERE
+            cmt.nReply = ${nCommentSeq}
+        ORDER BY
+            cmt.dtCreateDate
     </select>
     <select id="selReply" resultType="CommentVo">
-        SELECT cmt.*, member.sName AS username
-        FROM tComment cmt
-        INNER JOIN tUser member
-        ON cmt.fkUserSeq = member.nUserSeq
-        AND nCommentSeq = ${nCommentSeq}
+        SELECT
+            cmt.*,
+            member.sName AS username
+        FROM
+            tComment cmt
+            INNER JOIN tUser member ON (cmt.fkUserSeq = member.nUserSeq)
+        WHERE
+            nCommentSeq = ${nCommentSeq}
     </select>
 
     <update id="updComment">
-        UPDATE tComment
-        SET sContent = #{sContent}
-        WHERE nCommentSeq = ${nCommentSeq} AND fkUserSeq = ${fkUserSeq}
+        UPDATE
+            tComment
+        SET
+            sContent = #{sContent}
+        WHERE
+            nCommentSeq = ${nCommentSeq}
+            AND fkUserSeq = ${fkUserSeq}
     </update>
 </mapper>

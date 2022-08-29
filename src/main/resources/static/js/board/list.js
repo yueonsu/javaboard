@@ -45,7 +45,7 @@ if (boardContainer) {
             const tr = document.createElement('tr');
             const replaceTitle = item.stitle.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
             tr.innerHTML = `
-                <td>${item.nboardSeq}</td>
+                <td>${item.rowNumber}</td>
                 <td>${replaceTitle}</td>
                 <td>${item.suserName}</td> 
                 <td>${item.dtCreateDate}</td> 

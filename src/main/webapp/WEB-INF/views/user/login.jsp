@@ -28,13 +28,7 @@
                         <a href="/user/join"><button type="button" class="btn btn-secondary btn-sm p-3 w-25 mt-3">회원가입</button></a>
                     </div>
                     <div>
-                        <a href="/test/board/main.php"><button type="button" class="btn btn-secondary btn-sm p-3 w-25 mt-3">메인</button></a>
-                    </div>
-
-                    <div class="find-wrap">
-                        <span class="find-id">아이디찾기</span>
-                        <span>/</span>
-                        <span class="find-pw">비밀번호 찾기</span>
+                        <a href="/"><button type="button" class="btn btn-secondary btn-sm p-3 w-25 mt-3">메인</button></a>
                     </div>
                 </div>
             </form>

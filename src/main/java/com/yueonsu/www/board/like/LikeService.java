@@ -4,6 +4,7 @@ import com.yueonsu.www.board.like.model.LikeDto;
 import com.yueonsu.www.board.like.model.LikeEntity;
 import com.yueonsu.www.board.model.BoardResultVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +21,7 @@ public class LikeService {
         boolean isLike = false;
         try {
             isLike = null != likeMapper.selLike(entity);
-        } catch (Exception ignored) {
+        } catch (NullPointerException ignored) {
             vo.setStatus("400");
             vo.setDesc("fail");
         }
@@ -50,7 +51,7 @@ public class LikeService {
                 likeMapper.insLike(entity);
                 status = 1;
                 dto.setStatus("+");
-            } catch (Exception ignored) {
+            } catch (DuplicateKeyException ignored) {
                 vo.setStatus("400");
                 vo.setDesc("fail");
                 vo.setResult(0);

@@ -85,11 +85,13 @@ if (detailContainer) {
                                 fkBoardSeq : nBoardSeq
                             }
                             myFetch.post('/ajax/comment/reply', data => {
-                                if('200' === data.status) {
+                                if ('200' === data.status) {
                                     const list = [];
                                     list.push(data.result)
                                     createReplyFormDiv.remove();
                                     makeReplyElem(commentDiv, list);
+                                } else {
+                                    alert('답변등록에 실패했습니다.');
                                 }
                             }, replyData);
                         });
@@ -109,6 +111,12 @@ if (detailContainer) {
                         const createModElem = makeModElem(commentDiv, item);
                         const saveButton = document.querySelector('.reply-submit');
                         saveButton.addEventListener('click', () => {
+                            /** 본인이 쓴 댓글이 아닐 경우 */
+                            if (loginUserPk !== item.fkUserSeq) {
+                                alert('본인이 쓴 댓글만 수정할 수 있습니다.');
+                                return;
+                            }
+
                             const sContent = document.querySelector('.reply-content').value;
                             const nCommentSeq = item.ncommentSeq;
                             const fkUserSeq = loginUserPk
@@ -120,6 +128,8 @@ if (detailContainer) {
                                 if ('200' === data.status) {
                                     createModElem.remove();
                                     commentDiv.querySelector('.comment-ctnt').innerText = sContent;
+                                } else {
+                                    alert('댓글 수정에 실패했습니다.');
                                 }
                             }, modData);
                         });
@@ -128,7 +138,22 @@ if (detailContainer) {
                     /** 삭제 클릭 이벤트 */
                     const commentDel = commentMenu.querySelector('.comment-del');
                     commentDel.addEventListener('click', () => {
-                        console.log('comment del');
+                        if (!confirm('댓글을 삭제하시겠습니까?')) { return; }
+
+                        /** 본인이 쓴 댓글이 아닐 경우 */
+                        if (loginUserPk !== item.fkUserSeq) {
+                            alert('본인이 쓴 댓글만 삭제할 수 있습니다.');
+                            return;
+                        }
+                        const nCommentSeq = item.ncommentSeq;
+                        myFetch.delete('/ajax/comment', data => {
+                            if (data.status === '200') {
+                                location.reload();
+                            } else {
+                                alert('댓글 삭제에 실패했습니다.');
+                            }
+                        }, {nCommentSeq, fkBoardSeq : nBoardSeq});
+                        
                     });
                 }
             });
@@ -142,6 +167,7 @@ if (detailContainer) {
             const makeReplyElem = (elem, list) => {
                 list.forEach(item => {
                     const createReplyDiv = document.createElement('div');
+                    const content = item.scontent.replaceAll('<', '&lt;').replaceAll('\n', '<br/>');
                     createReplyDiv.classList.add('comment-content');
                     createReplyDiv.classList.add('comment-reply');
                     createReplyDiv.innerHTML = `
@@ -150,7 +176,7 @@ if (detailContainer) {
                                     <span>${item.username}</span>
                                 </div>
                                 <div class="comment-ctnt-wrap">
-                                    <span class="comment-ctnt">${item.scontent.replaceAll('\n', '<br/>')}</span>
+                                    <span class="comment-ctnt">${content}</span>
                                 </div>
                                 <div>${item.dtCreateDate}</div>
                                 <div class="comment-menu"></div>
@@ -172,7 +198,7 @@ if (detailContainer) {
                             const createModElem = makeModElem(createReplyDiv, item);
                             const saveButton = document.querySelector('.reply-submit');
 
-                            /** 답변달기 클릭 이벤트 */
+                            /** 수정완료 클릭 이벤트 */
                             saveButton.addEventListener('click', () => {
                                 const sContent = document.querySelector('.reply-content').value;
                                 const nCommentSeq = item.ncommentSeq;
@@ -183,7 +209,9 @@ if (detailContainer) {
                                 myFetch.put('/ajax/comment', data => {
                                     if ('200' === data.status) {
                                         createModElem.remove();
-                                        createReplyDiv.querySelector('.comment-ctnt').innerText = sContent;
+                                        createReplyDiv.querySelector('.comment-ctnt').innerText = sContent.replaceAll('<', '&lt;');
+                                    } else {
+                                        alert('댓글 수정에 실패했습니다.');
                                     }
                                 }, modData);
                             });
@@ -192,7 +220,20 @@ if (detailContainer) {
                         /** 대댓글 삭제 클릭 이벤트 */
                         const commentDel = commentMenu.querySelector('.comment-del');
                         commentDel.addEventListener('click', () => {
-                            console.log('reply del');
+                            if (!confirm('댓글을 삭제하시겠습니까?')) { return; }
+                            if (loginUserPk !== item.fkUserSeq) {
+                                alert('본인이 쓴 댓글만 삭제할 수 있습니다.');
+                                return;
+                            }
+                            const nCommentSeq = item.ncommentSeq;
+
+                            myFetch.delete('/ajax/comment/reply', data => {
+                                if (data.status === '200') {
+                                    location.reload();
+                                } else {
+                                    alert('삭제에 실패했습니다.');
+                                }
+                            }, {nCommentSeq});
                         });
                     }
                 });

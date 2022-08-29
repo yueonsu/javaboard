@@ -10,7 +10,7 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://192.168.56.109:3306/dbBoard
+    url: jdbc:mariadb://192.168.56.109:3306/dbBoard?allowMultiQueries=true
     hikari:
       username: root
       password: root

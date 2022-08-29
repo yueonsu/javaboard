@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class MainController {
-    // 댓글
-    // tHit fkUserSeq -> sIp
 
     @GetMapping
     public String main() {

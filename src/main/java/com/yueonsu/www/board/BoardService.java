@@ -6,6 +6,7 @@ import com.yueonsu.www.board.model.BoardPageable;
 import com.yueonsu.www.board.model.BoardResultVo;
 import com.yueonsu.www.board.model.BoardVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public class BoardService {
 
     private final BoardMapper boardMapper;
     private final AuthenticationFacade authenticationFacade;
+
+    public int selBoardLastSeq() {
+        return boardMapper.selBoardLastSeq().getNBoardSeq();
+    }
 
     /**
      * 게시글 리스트
@@ -34,7 +39,7 @@ public class BoardService {
         List<BoardVo> vo = null;
         try {
             vo = boardMapper.selBoardList(pageable);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             resultVo.setStatus("400");
             resultVo.setDesc("fail");
         }
@@ -55,7 +60,7 @@ public class BoardService {
         pageObj.setPage(pageable.getPage());
         try {
             pageObj.setTotalCount(boardMapper.selBoardCount(pageable).getTotalCount());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             vo.setStatus("400");
             vo.setDesc("fail");
         }
@@ -74,14 +79,12 @@ public class BoardService {
      * @return
      */
     public BoardResultVo insBoard(BoardEntity entity) {
-        // 로그인된 유저PK를 fkUserSeq 컬럼에 insert
-        entity.setFkUserSeq(authenticationFacade.getLoginUserPk());
         BoardResultVo vo = new BoardResultVo();
         int result = 0;
         try {
             result = boardMapper.insBoard(entity);
-        } catch (Exception ignored) {
-            vo.setStatus("400");
+        } catch (DuplicateKeyException ignored) {
+            vo.setStatus("500");
             vo.setDesc("fail");
         }
         vo.setResult(result);
@@ -102,7 +105,7 @@ public class BoardService {
         BoardResultVo resultVo = new BoardResultVo();
         try {
             boardVo = boardMapper.selBoardDetail(nBoardSeq);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             resultVo.setStatus("400");
             resultVo.setDesc("fail");
         }
@@ -121,7 +124,7 @@ public class BoardService {
         BoardEntity entity = null;
         try {
             entity = boardMapper.selModData(nBoardSeq);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             vo.setStatus("400");
             vo.setDesc("fail");
         }

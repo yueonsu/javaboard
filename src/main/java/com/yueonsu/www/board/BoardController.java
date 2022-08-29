@@ -1,13 +1,9 @@
 package com.yueonsu.www.board;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yueonsu.www.auth.AuthenticationFacade;
 import com.yueonsu.www.board.hit.HitService;
 import com.yueonsu.www.board.hit.model.HitEntity;
-import com.yueonsu.www.board.model.BoardEntity;
-import com.yueonsu.www.board.model.BoardPageable;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +16,7 @@ public class BoardController {
 
     private final BoardService boardService;
     private final HitService hitService;
+    private final AuthenticationFacade authenticationFacade;
 
     /**
      * 게시판 리스트
@@ -52,10 +49,14 @@ public class BoardController {
      * @return
      */
     @GetMapping("/detail")
-    public String detail(int nBoardSeq) {
+    public String detail(@RequestParam int nBoardSeq) {
         HitEntity entity = new HitEntity();
         entity.setFkBoardSeq(nBoardSeq);
-        hitService.hitCountUp(entity);
+        entity.setFkUserSeq(authenticationFacade.getLoginUserPk());
+
+        if (0 != nBoardSeq) {
+            hitService.hitCountUp(entity);
+        }
         return "board/detail";
     }
 }

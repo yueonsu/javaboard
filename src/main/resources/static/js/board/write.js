@@ -33,10 +33,11 @@ if(writeContainer) {
                 scontent : edit.getData()
             }
             myFetch.post('/ajax/board/detail', data => {
+                console.log(data);
                 if(data.status === '200') {
                     location.href = `/board/detail?nBoardSeq=${data.result.nboardSeq}`;
                 } else if (data.status === '400') {
-                    alert('글 등록에 실패했습니다.');
+                    alert(data.desc);
                 }
             }, data);
         });

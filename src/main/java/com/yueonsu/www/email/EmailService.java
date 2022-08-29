@@ -1,8 +1,7 @@
 package com.yueonsu.www.email;
 
 import com.yueonsu.www.user.model.UserEntity;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -10,9 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class EmailService {
 
-    @Autowired private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     public String sendCode(UserEntity entity) {
         Random random = new Random();

@@ -2,20 +2,12 @@ package com.yueonsu.www.aop;
 
 import com.yueonsu.www.auth.AuthenticationFacade;
 import com.yueonsu.www.board.BoardMapper;
-import com.yueonsu.www.board.BoardService;
 import com.yueonsu.www.board.model.BoardResultVo;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 
 @Component
 @Aspect

@@ -3,25 +3,36 @@
 <mapper namespace="com.yueonsu.www.board.like.LikeMapper">
     <insert id="insLike">
         INSERT INTO tLike
-        (fkUserSeq, fkBoardSeq)
+            (fkUserSeq, fkBoardSeq)
         VALUES
-        (${fkUserSeq}, ${fkBoardSeq})
+            (${fkUserSeq}, ${fkBoardSeq})
     </insert>
 
     <select id="selLike" resultType="LikeEntity">
-        SELECT *
-        FROM tLike
-        WHERE fkUserSeq = ${fkUserSeq} AND fkBoardSeq = ${fkBoardSeq}
+        SELECT
+            *
+        FROM
+            tLike
+        WHERE
+            fkUserSeq = ${fkUserSeq}
+            AND fkBoardSeq = ${fkBoardSeq}
     </select>
 
     <update id="updBoardLikeCount">
-        UPDATE tBoard
-        SET nLikeCount = nLikeCount ${status} 1
-        WHERE nBoardSeq = ${fkBoardSeq}
+        UPDATE
+            tBoard
+        SET
+            nLikeCount = nLikeCount ${status} 1
+        WHERE
+            nBoardSeq = ${fkBoardSeq}
     </update>
 
     <delete id="delLike">
-        DELETE FROM tLike
-        WHERE fkUserSeq = ${fkUserSeq} AND fkBoardSeq = ${fkBoardSeq}
+        DELETE
+        FROM
+            tLike
+        WHERE
+            fkUserSeq = ${fkUserSeq}
+            AND fkBoardSeq = ${fkBoardSeq}
     </delete>
 </mapper>
