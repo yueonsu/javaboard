@@ -281,9 +281,13 @@ if (detailContainer) {
 
     /** 페이징 출력 */
     const setPage = (data) => {
-
         const pageList = document.querySelector('.page-list');
         pageList.innerHTML = null;
+
+        /**
+         * 댓글 없을 때
+         */
+        if (0 === data.totalPage) { return; }
 
         const isPrev = document.querySelector('.comment-prev');
         const isNext = document.querySelector('.comment-next');
@@ -303,6 +307,9 @@ if (detailContainer) {
             </a>
         `;
 
+        /**
+         * 첫 번째 페이지일 때
+         */
         if (!data.previous) {
             commentPrev.classList.add('disabled');
         } else {
@@ -321,6 +328,9 @@ if (detailContainer) {
             </a>
         `;
 
+        /**
+         * 마지막 페이지일 대
+         */
         if (!data.next) {
             commentNext.classList.add('disabled');
         } else {

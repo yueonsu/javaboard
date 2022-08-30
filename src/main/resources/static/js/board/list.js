@@ -85,6 +85,16 @@ if (boardContainer) {
      */
     const setBoardPage = (pageData) => {
         pagination.innerHTML = null;
+        if (0 === pageData.totalCount) {
+            const boardTableBody = document.querySelector('.board-table-body');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td colspan="7" style="text-align: center"><strong>글이 없습니다.</strong></td>
+            `;
+            boardTableBody.appendChild(tr);
+            return;
+        }
+        console.log(pageData);
 
         /**
          *  페이지 이전페이지 버튼
@@ -170,7 +180,6 @@ if (boardContainer) {
      */
     const getBoardList = (page, sel, text) => {
         myFetch.get('/ajax/board/list', data => {
-            console.log(data);
             if(data.status === "200") {
                 setBoardList(data.result);
                 getBoardPageList(page, sel, text);

@@ -11,11 +11,6 @@ public class CommentEntity {
     private int fkUserSeq;
     private int fkBoardSeq;
     private String sContent;
-    private Timestamp dtCreateDate;
+    private String dtCreateDate;
     private int nReply;
-
-    public String getDtCreateDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return simpleDateFormat.format(this.dtCreateDate);
-    }
 }
